@@ -88,7 +88,7 @@ public class ReturnService implements IReturnService{
     @Override
     public ResponseReturn getReturnRequest(int id){
         Returns returnObj = returnRepo.findReturnsObjectById(id);
-        if(returnObj != null && returnObj.getStatus() != "REJECTED"){
+        if(returnObj != null){
             Orders orderObj = orderRepo.findOrderById(returnObj.getOrderid());
             Item itemObj = itemRepo.findById(returnObj.getItem_id());
             ResponseReturn response = new ResponseReturn(
@@ -110,11 +110,18 @@ public class ReturnService implements IReturnService{
         if(returnObj !=null){
             Item itemObj = itemRepo.findById(itemid);
             if("AWAITING_APPROVAL".equalsIgnoreCase(returnObj.getStatus())){
-            if ("ACCEPTED".equalsIgnoreCase(status.getStatusqc()) || "REJECTED".equalsIgnoreCase(status.getStatusqc())) {
+            if ("ACCEPTED".equalsIgnoreCase(status.getStatusqc())) {
                 returnObj.setStatus("COMPLETE");
                 returnRepo.save(returnObj);
                 itemObj.setQc(status.getStatusqc());
                 itemRepo.save(itemObj);
+            }
+            if("REJECTED".equalsIgnoreCase(status.getStatusqc())){
+                int quantity = itemObj.getQuantity() + returnObj.getQuantity();
+                itemObj.setQc(status.getStatusqc());
+                itemObj.setQuantity(quantity);
+                itemRepo.save(itemObj);
+                returnRepo.delete(returnObj);
             }
         }
         return null;
