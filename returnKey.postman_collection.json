@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "ddc87908-e649-4333-8dbd-7f2f335a54a1",
+		"name": "returnKey",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19741781"
+	},
+	"item": [
+		{
+			"name": "create returns",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\":\"RK-912\",\r\n    \"email\":\"karen@example.com\",\r\n    \"quantity\":\"1\",\r\n    \"itemId\":\"6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/commerce/returns",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commerce",
+						"returns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get returns",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/commerce/returns/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commerce",
+						"returns",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pending returns",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\":\"RK-912\",\r\n    \"email\":\"karen@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/commerce/pending/returns",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commerce",
+						"pending",
+						"returns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit QC returns",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statusqc\":\"ACCEPTED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/commerce/returns/2/item/6/qc/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commerce",
+						"returns",
+						"2",
+						"item",
+						"6",
+						"qc",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

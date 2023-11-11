@@ -1,0 +1,55 @@
+-- H2 2.2.224;
+;             
+CREATE USER IF NOT EXISTS "SA" SALT '47471777db88bb32' HASH 'b69665686b7e6423a4a04d477673cfa8778ba90177854a650f3d59a7b71679b6' ADMIN;         
+CREATE SEQUENCE "PUBLIC"."HIBERNATE_SEQUENCE" START WITH 1 RESTART WITH 3;    
+CREATE CACHED TABLE "PUBLIC"."ORDERS"(
+    "ID" INTEGER NOT NULL,
+    "ORDERID" CHARACTER VARYING(255),
+    "EMAIL_ADDRESS" CHARACTER VARYING(255),
+    "ITEM_ID" INTEGER
+);             
+ALTER TABLE "PUBLIC"."ORDERS" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_8" PRIMARY KEY("ID");       
+-- 10 +/- SELECT COUNT(*) FROM PUBLIC.ORDERS; 
+INSERT INTO "PUBLIC"."ORDERS" VALUES
+(1, 'RK-478', 'john@example.com', 1),
+(2, 'RK-478', 'john@example.com', 2),
+(3, 'RK-642', 'will@example.com', 3),
+(4, 'RK-238', 'carly@example.com', 4),
+(5, 'RK-238', 'carly@example.com', 5),
+(6, 'RK-238', 'carly@example.com', 8),
+(7, 'RK-912', 'karen@example.com', 6),
+(8, 'RK-239', 'steve@example.com', 1),
+(9, 'RK-149', 'dalton@example.com', 3),
+(10, 'RK-149', 'dalton@example.com', 7);          
+CREATE CACHED TABLE "PUBLIC"."RETURNS"(
+    "ID" INTEGER NOT NULL,
+    "ORDERID" INTEGER,
+    "ESTIMATED_RETURN" DOUBLE PRECISION,
+    "TOKEN" CHARACTER VARYING(255),
+    "STATUS" CHARACTER VARYING(255),
+    "ITEM_ID" INTEGER,
+    "QUANTITY" INTEGER
+);          
+ALTER TABLE "PUBLIC"."RETURNS" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_6" PRIMARY KEY("ID");      
+-- 1 +/- SELECT COUNT(*) FROM PUBLIC.RETURNS; 
+INSERT INTO "PUBLIC"."RETURNS" VALUES
+(2, 7, 149.99, 'gj8-RK-912', 'COMPLETE', 6, 1);        
+CREATE CACHED TABLE "PUBLIC"."ITEM"(
+    "ID" INTEGER NOT NULL,
+    "SKU" CHARACTER VARYING(255),
+    "QUANTITY" INTEGER,
+    "PRICE" DOUBLE PRECISION,
+    "ITEM_NAME" CHARACTER VARYING(255),
+    "QC" CHARACTER VARYING(255)
+);     
+ALTER TABLE "PUBLIC"."ITEM" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_2" PRIMARY KEY("ID");         
+-- 8 +/- SELECT COUNT(*) FROM PUBLIC.ITEM;    
+INSERT INTO "PUBLIC"."ITEM" VALUES
+(1, 'MENS-156', 2, 50.0, 'Small Black T-Shirt', NULL),
+(2, 'NIKE-7', 1, 110.75, 'Nike Air Jordans - Size 7', NULL),
+(3, 'SOC-1', 2, 25.99, 'Soccer Ball', NULL),
+(4, 'MU-5091', 3, 15.25, 'Lip Gloss', NULL),
+(5, 'NIKE-56', 1, 75.5, 'Nike Medium Red Leggings', NULL),
+(6, 'PAR-14', 0, 149.99, U&'Chanel - CHANCE EAU FRA\00ceCHE Eau de Toilette', 'ACCEPTED'),
+(7, 'NIKE-143', 1, 249.99, 'Nike Mercurial Superfly 8 Elite FG Firm Ground Soccer Cleat', NULL),
+(8, 'MU-4129', 2, 22.85, 'Eye Shadow', NULL); 
